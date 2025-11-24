@@ -1,0 +1,70 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "epml"
+version = "0.0.1"
+description = "Engineering Practices in Machine Learning"
+authors = [
+  { name = "dzaripov" },
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License"
+]
+dependencies = [
+    "ipython",
+    "jupyterlab",
+    "loguru",
+    "matplotlib",
+    "mkdocs",
+    "notebook",
+    "numpy",
+    "pandas",
+    "pip",
+    "pytest",
+    "python-dotenv",
+    "ruff",
+    "scikit-learn",
+    "tqdm",
+    "typer",
+]
+requires-python = "~=3.10.0"
+
+
+# --- RUFF CONFIG ---
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort (сортировка импортов)
+    "B",  # flake8-bugbear
+    "UP", # pyupgrade (обновление синтаксиса)
+]
+ignore = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["epml"]
+force-sort-within-sections = true
+
+
+# --- BANDIT CONFIG ---
+[tool.bandit]
+exclude_dirs = ["tests", ".venv"]
+tests = ["B201", "B301"]
+skips = ["B101"] # Игнорируем assert
+
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.5.0",
+    "ty>=0.0.1a27",
+]
